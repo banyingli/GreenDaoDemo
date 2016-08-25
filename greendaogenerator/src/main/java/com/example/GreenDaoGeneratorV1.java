@@ -26,7 +26,7 @@ public class GreenDaoGeneratorV1 {
 
         // 为表添加字段
         note.addIdProperty();
-        note.addIntProperty("concert_no").autoincrement(); // 演出编号自增长
+        note.addLongProperty("concert_no").primaryKey().autoincrement(); // 演出编号自增长
         note.addStringProperty("title").notNull(); // 演出名称不为空
         note.addStringProperty("venue"); // 演出场馆
     }
