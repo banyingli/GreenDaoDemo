@@ -1,7 +1,9 @@
 package com.example;
-import de.greenrobot.daogenerator.DaoGenerator;
-import de.greenrobot.daogenerator.Entity;
-import de.greenrobot.daogenerator.Schema;
+
+
+import org.greenrobot.greendao.generator.DaoGenerator;
+import org.greenrobot.greendao.generator.Entity;
+import org.greenrobot.greendao.generator.Schema;
 
 public class GreenDaoGeneratorV1 {
     public static void main(String[] args) throws Exception {
@@ -12,7 +14,7 @@ public class GreenDaoGeneratorV1 {
         // 添加实体
         addConcert(schema);
 
-        // 最后我们将使用 DAOGenerator 类的 generateAll() 方法自动生成代码，此处你需要根据自己的情况更改输出目录（既之前创建的 java-gen)。
+        // 使用 DAOGenerator 类的 generateAll() 方法自动生成代码，此处需要根据自己的情况更改输出目录
         new DaoGenerator().generateAll(schema, "greendaogenerator/src-gen-v1");
     }
 
@@ -26,8 +28,7 @@ public class GreenDaoGeneratorV1 {
 
         // 为表添加字段
         note.addIdProperty();
-        note.addLongProperty("concert_no").primaryKey().autoincrement(); // 演出编号自增长
         note.addStringProperty("title").notNull(); // 演出名称不为空
-        note.addStringProperty("venue"); // 演出场馆
+        note.addStringProperty("venue").notNull(); // 演出场馆
     }
 }

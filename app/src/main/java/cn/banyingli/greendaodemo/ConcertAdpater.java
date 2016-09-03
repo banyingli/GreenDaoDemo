@@ -15,9 +15,11 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 /**
  * Created by Administrator on 2016/8/25.
  */
-public class ConcertAdpater extends RecyclerView.Adapter<ConcertAdpater.MyViewHolder> {
+public class ConcertAdpater extends RecyclerView.Adapter<ConcertAdpater.MyViewHolder>
+        implements View.OnClickListener, View.OnLongClickListener{
     private Context mContext;
     private List<Concert> dataList;
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public ConcertAdpater(Context mContext, List<Concert> dataList) {
         this.mContext = mContext;
@@ -26,10 +28,16 @@ public class ConcertAdpater extends RecyclerView.Adapter<ConcertAdpater.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                mContext).inflate(R.layout.item_concert, parent,
-                false));
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_concert, parent,
+                false);
+        view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
+        MyViewHolder holder = new MyViewHolder(view);
         return holder;
+    }
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 
     @Override
@@ -37,11 +45,27 @@ public class ConcertAdpater extends RecyclerView.Adapter<ConcertAdpater.MyViewHo
         holder.titleTv.setText(dataList.get(position).getTitle());
         holder.venueTv.setText(dataList.get(position).getVenue());
         holder.dateTv.setText("----");
+        holder.itemView.setTag(dataList.get(position));
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(null != mOnItemClickListener){
+            mOnItemClickListener.onItemClick(v, (Concert) v.getTag());
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if(null != mOnItemClickListener){
+            mOnItemClickListener.onItemLongClick(v, (Concert) v.getTag());
+        }
+        return false;
     }
 
     class MyViewHolder extends ViewHolder {
@@ -56,6 +80,11 @@ public class ConcertAdpater extends RecyclerView.Adapter<ConcertAdpater.MyViewHo
             venueTv = (TextView) view.findViewById(R.id.venueTv);
             dateTv = (TextView) view.findViewById(R.id.dateTv);
         }
+    }
+
+    public interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, Concert data);
+        void onItemLongClick(View view, Concert data);
     }
 
 }

@@ -2,4 +2,6 @@
     <string name="app_name">GreenDaoDemo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_create">新增</string>
+    <string name="action_restore">重置</string>
+    <string name="action_update">更新</string>
 </resources>

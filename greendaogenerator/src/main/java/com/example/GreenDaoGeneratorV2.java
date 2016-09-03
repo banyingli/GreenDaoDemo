@@ -1,53 +1,53 @@
 package com.example;
-import de.greenrobot.daogenerator.DaoGenerator;
-import de.greenrobot.daogenerator.Entity;
-import de.greenrobot.daogenerator.Schema;
+import org.greenrobot.greendao.generator.DaoGenerator;
+import org.greenrobot.greendao.generator.Entity;
+import org.greenrobot.greendao.generator.Schema;
 
 public class GreenDaoGeneratorV2 {
     public static void main(String[] args) throws Exception {
-        // ´´½¨Ò»¸öÓÃÓÚSchema¶ÔÏó¡£
-        // Á½¸ö²ÎÊý·Ö±ð´ú±í£ºÊý¾Ý¿â°æ±¾ºÅÓë×Ô¶¯Éú³É´úÂëµÄ°üÂ·¾¶¡£
+        // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Schemaï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½?ï¿½ï¿½Ý¿ï¿½æ±¾ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½É´ï¿½ï¿½ï¿½Ä°ï¿½Â·ï¿½ï¿½ï¿½ï¿½
         Schema schema = new Schema(2, "cn.banyingli.greendaodemo.db");
 
-        // Ìí¼ÓÊµÌå
+        // ï¿½ï¿½ï¿½Êµï¿½ï¿½
         addConcert(schema);
 
-        // ¡¾V2ÐÂÔö±í¡¿
+        // ï¿½ï¿½V2ï¿½ï¿½ï¿½ï¿½ï¿½?
         addSongs(schema);
 
-        // ×îºóÎÒÃÇ½«Ê¹ÓÃ DAOGenerator ÀàµÄ generateAll() ·½·¨×Ô¶¯Éú³É´úÂë£¬´Ë´¦ÄãÐèÒª¸ù¾Ý×Ô¼ºµÄÇé¿ö¸ü¸ÄÊä³öÄ¿Â¼£¨¼ÈÖ®Ç°´´½¨µÄ java-gen)¡£
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ê¹ï¿½ï¿½ DAOGenerator ï¿½ï¿½ï¿½ generateAll() ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½É´ï¿½ï¿½ë£¬ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ java-gen)ï¿½ï¿½
         new DaoGenerator().generateAll(schema, "greendaogenerator/src-gen-v2");
     }
 
     /**
-     * Ìí¼Ó±íConcert
+     * ï¿½ï¿½Ó±ï¿½Concert
      * @param schema
      */
     private static void addConcert(Schema schema) {
-        // Ìí¼ÓÒ»ÕÅÃûÎª¡¾Concert¡¿µÄ±í
+        // ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Concertï¿½ï¿½ï¿½Ä±ï¿½
         Entity note = schema.addEntity("Concert");
 
-        // Îª±íÌí¼Ó×Ö¶Î
+        // Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½
         note.addIdProperty();
-        note.addIntProperty("concert_no").autoincrement(); // ÑÝ³ö±àºÅ×ÔÔö³¤
-        note.addStringProperty("title").notNull(); // ÑÝ³öÃû³Æ²»Îª¿Õ
-        note.addStringProperty("venue"); // ÑÝ³ö³¡¹Ý
+        note.addIntProperty("concert_no").autoincrement(); // ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        note.addStringProperty("title").notNull(); // ï¿½Ý³ï¿½ï¿½ï¿½Æ²ï¿½Îªï¿½ï¿½
+        note.addStringProperty("venue"); // ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        // ¡¾V2ÐÂÔö×Ö¶Î¡¿
-        note.addDateProperty("date"); // ÑÝ³öÊ±¼ä
+        // ï¿½ï¿½V2ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶Î¡ï¿½
+        note.addDateProperty("date"); // ï¿½Ý³ï¿½Ê±ï¿½ï¿½
     }
 
     /**
-     * Ìí¼Ó±íSongs
+     * ï¿½ï¿½Ó±ï¿½Songs
      * @param schema
      */
     private static void addSongs(Schema schema) {
-        // Ìí¼ÓÒ»ÕÅÃûÎª¡¾Songs¡¿µÄ±í
+        // ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Songsï¿½ï¿½ï¿½Ä±ï¿½
         Entity note = schema.addEntity("Songs");
 
-        // Îª±íÌí¼Ó×Ö¶Î
+        // Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½
         note.addIdProperty();
-        note.addIntProperty("concert_no"); // Ëù¶ÔÓ¦µÄÑÝ³ö±àºÅ
-        note.addStringProperty("title").notNull(); // ¸èÇúÃû³Æ²»Îª¿Õ
+        note.addIntProperty("concert_no"); // ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½
+        note.addStringProperty("title").notNull(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½Îªï¿½ï¿½
     }
 }
