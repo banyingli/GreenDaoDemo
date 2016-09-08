@@ -43,7 +43,9 @@ public class MainActivityFragment extends BaseFragment implements ConcertAdpater
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
-
+        recycleAdapter = new ConcertAdpater(this.getActivity(), dataList);
+        recycleAdapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(recycleAdapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -54,10 +56,8 @@ public class MainActivityFragment extends BaseFragment implements ConcertAdpater
     }
 
     private void loadData(){
-        dataList = concertDao.loadAll();
-        recycleAdapter = new ConcertAdpater(this.getActivity(), dataList);
-        recycleAdapter.setOnItemClickListener(this);
-        recyclerView.setAdapter(recycleAdapter);
+        dataList.addAll(concertDao.loadAll());
+        recycleAdapter.notifyDataSetChanged();
     }
 
     @Override

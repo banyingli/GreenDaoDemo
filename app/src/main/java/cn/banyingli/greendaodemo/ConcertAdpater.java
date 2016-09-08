@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.banyingli.greendaodemo.db.Concert;
@@ -26,6 +27,10 @@ public class ConcertAdpater extends RecyclerView.Adapter<ConcertAdpater.MyViewHo
         this.dataList = dataList;
     }
 
+    public void notifyChanged(){
+notifyDataSetChanged();
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_concert, parent,
@@ -39,6 +44,7 @@ public class ConcertAdpater extends RecyclerView.Adapter<ConcertAdpater.MyViewHo
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
+
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
